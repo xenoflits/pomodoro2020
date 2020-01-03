@@ -4,7 +4,8 @@ class Pomodoro extends React.Component {
     constructor() {
         super();
         this.toggle = this.toggle.bind(this);
-        this.resetTimer = this.resetTimer(this);
+        this.resetTimer = this.resetTimer.bind(this);
+        this.startTimer = this.startTimer.bind(this);
         this.state = {
             timer: 0,
             playing: false,
@@ -38,9 +39,9 @@ class Pomodoro extends React.Component {
         return (
             <div>
                 <div>
-                    <Button name="25m" clicker={this.startTimer}/>
-                    <Button name="10m" />
-                    <Button name="5m" />
+                    <Button name="25" clicker={this.startTimer}/>
+                    <Button name="10" clicker={this.startTimer}/>
+                    <Button name="5" clicker={this.startTimer}/>
                 </div>
                 <div>{this.state.timer}</div>
                 <div><Button name="start/pause"/>
@@ -51,8 +52,10 @@ class Pomodoro extends React.Component {
 }
 
 const Button = (props) => {
+    //let temp = props.name
+    
     return (
-        <button onClick={()=>props.clicker}>{props.name}</button>
+        <button onClick={()=>props.clicker(props.name)}>{props.name}</button>
     )
 }
 
