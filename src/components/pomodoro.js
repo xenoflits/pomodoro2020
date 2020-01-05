@@ -5,57 +5,89 @@ class Pomodoro extends React.Component {
         super();
         this.toggle = this.toggle.bind(this);
         this.resetTimer = this.resetTimer.bind(this);
+        this.setTimer = this.setTimer.bind(this);
         this.startTimer = this.startTimer.bind(this);
+        this.decrement = this.decrement.bind(this);
         this.state = {
-            timer: 0,
+            timer: 25,
             playing: false,
+
         }
     }
 
-    toggle(){
-        
+    toggle() {
+
         this.setState(prefState => ({
             playing: !prefState.playing,
-            
+
         }))
     }
 
-    startTimer(time){
+    setTimer(time) {
         this.setState({
-            playing: true,
             timer: time
 
         })
     }
 
-    resetTimer(){
+    resetTimer() {
         this.setState({
-            timer: 0,
+            timer: 25,
             playing: false
+
+        })
+        clearInterval(this.pulser)
+        
+    }
+    
+    decrement(){
+        let timer2 = this.state.timer-1
+
+        this.setState({
+            timer: timer2
         })
     }
+
+    
+    startPuls(){
+        this.pulser = setInterval(this.decrement,1000);
+    }
+
+    startTimer() {
+        let toggle = !this.state.playing
+        this.setState({
+            playing: toggle
+        })
+    this.startPuls();   
+    }
+
+    
+
+    
+
+
 
     render() {
         return (
             <div>
                 <div>
-                    <Button name="25" clicker={this.startTimer}/>
-                    <Button name="10" clicker={this.startTimer}/>
-                    <Button name="5" clicker={this.startTimer}/>
+                    <Button buttonStatus={this.state.playing} name="25" clicker={this.setTimer} />
+                    <Button buttonStatus={this.state.playing} name="10" clicker={this.setTimer} />
+                    <Button buttonStatus={this.state.playing} name="5" clicker={this.setTimer} />
                 </div>
                 <div>{this.state.timer}</div>
-                <div><Button name="start/pause"/>
-                <Button name="reset"/></div>
+                <div><Button clicker={this.startTimer} name="start/pause" />
+                    <Button clicker={this.resetTimer} name="reset" /></div>
             </div>
         )
     }
 }
 
 const Button = (props) => {
-    //let temp = props.name
-    
+    let buttonStatus = props.buttonStatus
+
     return (
-        <button onClick={()=>props.clicker(props.name)}>{props.name}</button>
+        <button disabled={buttonStatus} onClick={() => props.clicker(props.name)}>{props.name}</button>
     )
 }
 
