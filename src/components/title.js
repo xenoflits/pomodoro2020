@@ -2,7 +2,7 @@ import React from 'react'
 
 const Title = (props) => {
     return(
-        <div>Pomodoro timer + darkmode</div>
+        <div className="title">Pomodoro Timer</div>
     )
 }
 

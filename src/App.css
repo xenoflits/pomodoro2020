@@ -1,1 +1,63 @@
 
+:root {
+    --main-bg-color: #ff4d4d;
+
+}
+
+body {
+    background-color: var(--main-bg-color);
+    color: white;
+    font-size: 3rem;
+   
+}
+
+.buttonBar {
+    margin-top: 100px;
+}
+
+.pomodoro {
+    margin: auto;
+    width: 300px;
+    text-align: center;
+}
+
+button {
+    width: 80px;
+    height: 30px;
+    margin: 5px;
+    color: red;
+    font-size: 1.5rem;
+}
+
+.title{
+    width: 500px;
+    margin: auto;
+    text-align: center;
+    font-size: 4rem;
+}
+
+@media only screen and (max-width: 500px) {
+    body {
+      font-size: 1rem;
+    }
+
+    .title {
+        width: 100px;
+        font-size: 1rem;
+    }
+
+    button {
+        width: 30px;
+        height: 20px;
+        font-size: 0.5rem;
+        margin: 1px;
+    }
+
+    .buttonBar {
+        margin-top: 5px;
+    }
+
+    .pomodoro {
+        width: 100px;
+    }
+  }
